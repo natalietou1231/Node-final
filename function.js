@@ -13,6 +13,7 @@ var getAddress = (address)=>{
                 reject('Cannot find requested address');
             }else if (body.status == 'OK'){
                 resolve({
+                    //body
                     lag: body.results[0].geometry.location.lat,
                     lng: body.results[0].geometry.location.lng,
                     country_code: body.results[0].address_components[3].short_name
@@ -22,6 +23,12 @@ var getAddress = (address)=>{
     });
 };
 
+
+
 module.exports = {
     getAddress
 };
+
+// getAddress('metrotown').then((result)=>{
+//     console.log(result);
+// });
