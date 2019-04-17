@@ -6,21 +6,28 @@
 </head>
 <body>
 <div id="contact">
-    <h1>{{h1}}&nbsp; <font size="3"><a href={{pages.[0]}}>Home</a>&nbsp;&nbsp;<a href={{pages.[1]}}>Function 2</a></font></h1>
+    <h1>{{h1}}&nbsp; <font size="3"><a href={{pages.[0]}}>Home</a>&nbsp;&nbsp;<a href={{pages.[1]}}>Cards</a></font></h1>
 
     <form action="/form" method="post" align="center">
         <fieldset>
             <label for={{box1}}>{{box1}}:</label>
-            <input type="text" id={{box1}} name={{box1}} placeholder="Enter the city" />
+            <input type="text" id={{box1}} name={{box1}} placeholder="Enter the keyword" />
             <br><br>
             {{!-- {{name field for object}} --}}
-            <label for={{box2}}>{{box2}}:</label>
-            <input type="email" id={{box2}} name={{box2}} placeholder="Enter your email address" />
-            <br><br>
+            <!--<label for={{box2}}>{{box2}}:</label>-->
+            <!--<input type="email" id={{box2}} name={{box2}} placeholder="Enter your email address" />-->
+            <!--<br><br>-->
 
-            <input type="submit" value="Send message" />
+            <input type="submit" value="Search images" />
 
             <p>{{result}}</p>
+
+            <img src={{img1}}>
+            <p>{{desp1}}</p>
+            <br><br>
+
+            <img src={{img2}}>
+            <p>{{desp2}}</p>
 
         </fieldset>
     </form>

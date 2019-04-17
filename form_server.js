@@ -22,67 +22,63 @@ app.get('/', (req, res)=>{
         h1: 'Welcome .....',
         link1: 'City',
         link2: 'Function 2',
-        pages: ['/form', '/form2']
+        pages: ['/nasa', '/card']
     });
 });
 
 //The form itself, refer to the hbs file name
-app.get('/form', (req, res)=> {
+app.get('/nasa', (req, res)=> {
     res.render('form.hbs', {
-        title: 'Contact form',
-        h1: 'Send an email',
-        box1: 'city',
-        box2: 'email',
-        box3: 'message',
-        pages: ['/', '/form2']
+        title: 'NASA images',
+        h1: 'Search NASA images',
+        box1: 'keyword',
+        pages: ['/', '/cards']
     });
 });
 
 //form handler: after click submit button, refer to the form action name
-app.post('/form', (req, res)=> {
-    fun.getAddress(req.body.city).then((result)=>{
+app.post('/nasa', (req, res)=> {
+    fun.getImages(req.body.keyword).then((result)=>{
         res.render('form.hbs', {
-            title: 'Contact form',
-            h1: 'Send an email',
-            box1: 'city',
-            box2: 'email',
-            box3: 'message',
-            pages: ['/', '/form2'],
-            result: 'The country code for '+ req.body.city + ' is ' + result.country_code
+            title: 'NASA images',
+            h1: 'Search NASA images',
+            box1: 'keyword',
+            pages: ['/', '/cards'],
+            result: 'The images you search by keyword '+ req.body.keyword + ' is following:',
+            img1: result[0].img,
+            desp1: result[0].title,
+            img2: result[1].img,
+            desp2: result[1].title
         });
     }).catch((error)=>{
         res.render('form.hbs', {
-            title: 'Contact form',
-            h1: 'Send an email',
-            box1: 'city',
-            box2: 'email',
-            box3: 'message',
-            pages: ['/', '/form2'],
+            title: 'NASA images',
+            h1: 'Search NASA images',
+            box1: 'keyword',
+            pages: ['/', '/cards'],
             result: error
         });
     })
 
 });
 
-app.get('/form2', (req, res)=> {
+app.get('/cards', (req, res)=> {
     res.render('form2.hbs', {
-        title: 'Contact form',
-        h1: 'Send an email',
-        box1: 'city',
-        box2: 'email',
-        box3: 'message',
-        pages: ['/', '/form1']
+        title: 'Cards',
+        h1: 'Cards game',
+        box1: 'card_numbers',
+        pages: ['/', '/nasa']
     });
 });
 
-app.post('/form2', (req, res)=> {
+app.post('/cards', (req, res)=> {
     res.render('form2.hbs', {
         title: 'Contact form',
         h1: 'Send an email',
         box1: 'city',
         box2: 'email',
         box3: 'message',
-        pages: ['/', '/form1'],
+        pages: ['/', '/nasa'],
         result: req.body.city
     });
 });
