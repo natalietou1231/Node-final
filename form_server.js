@@ -18,7 +18,7 @@ hbs.registerHelper('getCurrentYear', ()=>{
 
 app.get('/', (req, res)=>{
     res.render('index.hbs', {
-        pages: ['/nasa', '/card']
+        pages: ['/nasa', '/cards']
     });
 });
 
