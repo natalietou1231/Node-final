@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fun = require('./function2');
+const fun = require('./function');
 const hbs = require('hbs');
 
 const port = process.env.PORT || 8080;
