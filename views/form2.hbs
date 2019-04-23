@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
+    <title>Cards</title>
 </head>
 <body>
 <div id="contact">
-    <h1>{{h1}}&nbsp; <font size="3"><a href={{pages.[0]}}>Home</a>&nbsp;&nbsp;<a href={{pages.[1]}}>Nasa</a></font></h1>
+    <h1>Cards game&nbsp; <font size="3"><a href={{pages.[0]}}>Home</a>&nbsp;&nbsp;<a href={{pages.[1]}}>Nasa</a></font></h1>
 
-    <form action="/form2" method="post" align="center">
+    <form action="/cards" method="post" align="center">
         <fieldset>
-            <label for={{box1}}>{{box1}}:</label>
+            <label for={{box1}}>Number of cards:</label>
             <input type="text" id={{box1}} name={{box1}} placeholder="Enter the number of card" />
             <br><br>
 
@@ -18,7 +18,9 @@
 
             <p>{{result}}</p>
 
-            <img src={{card1}}>&nbsp;<img src={{card2}}>&nbsp;<img src={{card3}}>&nbsp;<img src={{card4}}>&nbsp;<img src={{card5}}>
+           {{#each output}}
+                <img src = '{{img}}'>&nbsp;
+            {{/each}}
 
         </fieldset>
     </form>

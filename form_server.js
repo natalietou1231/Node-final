@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fun = require('./function');
+const fun = require('./function2');
 const hbs = require('hbs');
 
 const port = process.env.PORT || 8080;
@@ -18,10 +18,6 @@ hbs.registerHelper('getCurrentYear', ()=>{
 
 app.get('/', (req, res)=>{
     res.render('index.hbs', {
-        title: 'Home page',
-        h1: 'Welcome .....',
-        link1: 'City',
-        link2: 'Function 2',
         pages: ['/nasa', '/card']
     });
 });
@@ -29,8 +25,6 @@ app.get('/', (req, res)=>{
 //The form itself, refer to the hbs file name
 app.get('/nasa', (req, res)=> {
     res.render('form.hbs', {
-        title: 'NASA images',
-        h1: 'Search NASA images',
         box1: 'keyword',
         pages: ['/', '/cards']
     });
@@ -40,20 +34,13 @@ app.get('/nasa', (req, res)=> {
 app.post('/nasa', (req, res)=> {
     fun.getImages(req.body.keyword).then((result)=>{
         res.render('form.hbs', {
-            title: 'NASA images',
-            h1: 'Search NASA images',
             box1: 'keyword',
             pages: ['/', '/cards'],
             result: 'The images you search by keyword '+ req.body.keyword + ' is following:',
-            img1: result[0].img,
-            desp1: result[0].title,
-            img2: result[1].img,
-            desp2: result[1].title
+            output: result
         });
     }).catch((error)=>{
         res.render('form.hbs', {
-            title: 'NASA images',
-            h1: 'Search NASA images',
             box1: 'keyword',
             pages: ['/', '/cards'],
             result: error
@@ -64,23 +51,29 @@ app.post('/nasa', (req, res)=> {
 
 app.get('/cards', (req, res)=> {
     res.render('form2.hbs', {
-        title: 'Cards',
-        h1: 'Cards game',
-        box1: 'card_numbers',
+        box1: 'card_num',
         pages: ['/', '/nasa']
     });
 });
 
 app.post('/cards', (req, res)=> {
-    res.render('form2.hbs', {
-        title: 'Contact form',
-        h1: 'Send an email',
-        box1: 'city',
-        box2: 'email',
-        box3: 'message',
-        pages: ['/', '/nasa'],
-        result: req.body.city
+    fun.getDeck_id().then((result)=>{
+        return fun.getCards(result, req.body.card_num)
+    }).then((result)=>{
+        res.render('form2.hbs', {
+            box1: 'card_num',
+            pages: ['/', '/nasa'],
+            result: 'The cards are following:',
+            output: result
+        });
+    }).catch((error)=>{
+        res.render('form2.hbs', {
+            box1: 'card_num',
+            pages: ['/', '/nasa'],
+            result: error
+        });
     });
+
 });
 
 app.listen(port, ()=> {
