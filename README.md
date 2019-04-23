@@ -7,3 +7,9 @@ This web app contains two functions:
 
 2. Deck of Cards - input the number of cards to draw from the deck and display the cards, return new deck of cards when clicking Refresh\
    API: http://deckofcardsapi.com/
+
+I used the following modeules:
+- express
+- axios (async/await)
+- body-parser
+- hbs
